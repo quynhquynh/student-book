@@ -1,0 +1,41 @@
+#title {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  font-size: 0.9em;
+  border-radius: 15px;
+  background: black;
+  color: orange;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+button:hover {
+  font-size: 1em;
+}
+
+ul {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+a {
+  text-decoration: none;
+}
+
+.no-img {
+  position: relative;
+}
+
+.no-img:after {
+  content: "Add image";
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  color: black;
+}
