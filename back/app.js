@@ -38,13 +38,6 @@ data2.forEach(student => {
 })
 
 
-
-// cloudinary.config({
-//     cloud_name: 'qq',
-//     api_key: '686127214344714',
-//     api_secret: 'sjwFk0P3cx2TfcJEgU-IZNlZf-Y',
-// })
-
 'use strict';
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
