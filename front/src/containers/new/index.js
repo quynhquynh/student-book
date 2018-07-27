@@ -61,7 +61,7 @@ class New extends React.Component{
         const renderSubmit = () => (
             <div id='show-submit'>
                 <Link to='/students'>Back to Home</Link>
-                <SingleStudent {...this.props.values} src={this.props.addStudent.src} skills={values.skills.split(', ')} />
+                <SingleStudent {...this.props.values} src={this.props.addStudent.src} skills={values.skills} />
             </div>
         ) 
      

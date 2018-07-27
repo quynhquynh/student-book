@@ -18,7 +18,7 @@ const SingleStudent = ({skills, firstName, lastName, title, nationality, src, wh
             </div>
             <div>
                 <span>Skills: </span>
-                <span>{skills.join(', ')}</span>
+                <span>{skills}</span>
             </div>
             <div>
                 <span>Why Software Developer: </span>

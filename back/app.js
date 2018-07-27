@@ -6,11 +6,11 @@ import logger from 'morgan'
 import mongoose from 'mongoose'
 import multer from 'multer'
 import cloudinary from 'cloudinary'
-import axios from 'axios'
 import data from './public/data'
 import Students from './models'
 import * as studentController from './controllers'
 import { config } from './config'
+import { uploadNewStudent, uploadCurrentStudent } from './controllers/upload'
 
 const app = express()
 
@@ -38,10 +38,11 @@ data2.forEach(student => {
 })
 
 
-'use strict';
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-cloudinary.config(_extends({}, config));
+// 'use strict';
+// var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+// cloudinary.config(_extends({}, config));
+const { cloud_name, api_key, api_secret } = config
+cloudinary.config({cloud_name, api_key, api_secret})
 
 // data.forEach(student => {
 //     let { firstName, lastName, title, nationality, src, alt, skills, whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn } = student
@@ -72,41 +73,10 @@ app.get('/', (req, res) => {
 
 const storage = multer.memoryStorage()
 const upload = multer({ storage })
-app.post('/files', upload.single('src'), (req, res) => {
-    const {firstName, lastName, title, src, nationality, alt, skills, whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn} = req.body
-    if(req.file){
-        cloudinary.uploader.upload_stream(result => {
-            axios.post(`${req.headers.origin}students`, {src: result.secure_url,
-                firstName, lastName, title, nationality, alt: firstName, skills: skills.split(', '), whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn 
-            })
-                .then(response => {
-                    console.log('successful')
-                    res.status(200).json({
-                        success: true,
-                        src: result.secure_url
-                    })
-                })
-                .catch(e => {
-                    console.log('error', e.response)
-                    res.status(500).json(error.response.data)
-                })
-        }, {public_id: req.body.firstName}).end(req.file.buffer)
-    }else{
-        axios.post(`${req.headers.origin}students`, {firstName, lastName, title, nationality, alt: firstName, src: '', skills: skills.split(', '), whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn})
-            .then(response => {
-                console.log('successful without image')
-                res.status(200).json({
-                    success: true,
-                    src: ''
-                })
-            })
-            .catch(e => {
-                console.log('error', e.response)
-                res.status(500).json(error.response.data)
-            })
-    }
-    
-})
+
+app.post('/files', upload.single('src'), uploadNewStudent)
+
+app.post('/file', upload.single('src'), uploadCurrentStudent)
 
 app.get('/students', studentController.getStudents)
     .post('/students', studentController.addStudent)

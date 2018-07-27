@@ -2,8 +2,8 @@ export const FETCH_STUDENTS_SUCCESS = 'FETCH_STUDENTS_SUCCESS'
 export const FETCH_STUDENT_SUCCESS = 'FETCH_STUDENT_SUCCESS'
 export const FETCH_HAS_ERROR = 'FETCH_HAS_ERROR'
 export const IS_LOADING = 'IS_LOADING'
-export const ADD_STUDENT = 'ADD_STUDENT'
 export const ADD_STUDENT_SUCCESS = 'ADD_STUDENT_SUCCESS'
+export const UPDATE_STUDENT_SUCCESS = 'UPDATE_STUDENT_SUCCESS'
 
 export const isLoading = bool => {
     return {
@@ -67,3 +67,26 @@ export const addStudent = form => {
     }
 }
 
+export const updateStudentSuccess = data => {
+    return {
+        type: UPDATE_STUDENT_SUCCESS,
+        payload: data
+    }
+}
+
+export const updateStudent = form => {
+    const url = '/file'
+    return dispatch => {
+        dispatch(isLoading(true))
+        fetch(url, {
+            method: 'POST',
+            body: form
+        })
+        .then(response => {
+            console.log('response', response)
+            dispatch(isLoading(false))
+            return response.json()
+        })
+        .then(data => dispatch(updateStudentSuccess(data)))
+    }
+}

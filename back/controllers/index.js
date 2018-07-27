@@ -36,20 +36,22 @@ export const addStudent = (req, res) => {
 }
 
 export const updateStudent = (req, res) => {
-    Student.findOneAndUpdate({_id: req.body.id}, req.body, {new: true}, (err, student) => {
+    console.log('put come here')
+    console.log(req.body.id)
+    Student.findByIdAndUpdate(req.body.id, req.body, {new: true}, (err, student) => {
+        console.log(student)
         if(err){
             return res.json({
                 'success': false,
                 'message': 'some error',
                 'error': err
             })
-            console.log(student)
-            return res.json({
-                'success': true,
-                'message': 'Updated successfully',
-                student
-            })
         }
+        return res.json({
+            'success': true,
+            'message': 'Updated successfully',
+            student
+        })
     })
 }
 

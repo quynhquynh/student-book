@@ -1,4 +1,4 @@
-import { FETCH_STUDENTS_SUCCESS, FETCH_STUDENT_SUCCESS, ADD_STUDENT_SUCCESS, FETCH_HAS_ERROR, IS_LOADING } from '../actions/index'
+import { FETCH_STUDENTS_SUCCESS, FETCH_STUDENT_SUCCESS, ADD_STUDENT_SUCCESS, FETCH_HAS_ERROR, IS_LOADING, UPDATE_STUDENT_SUCCESS } from '../actions/index'
 
 
 export const hasError = (state = false, action) => {
@@ -40,6 +40,15 @@ export const student = (state = {}, action) => {
 export const addStudent = (state={}, action) => {
     switch(action.type){
         case ADD_STUDENT_SUCCESS:
+            return {...state, ...action.payload}
+        default:
+            return state
+    }
+}
+
+export const updateStudent = (state={}, action) => {
+    switch(action.type){
+        case UPDATE_STUDENT_SUCCESS:
             return {...state, ...action.payload}
         default:
             return state
