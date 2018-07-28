@@ -4,13 +4,11 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import logger from 'morgan'
 import mongoose from 'mongoose'
-import multer from 'multer'
 import cloudinary from 'cloudinary'
 import data from './public/data'
 import Students from './models'
-import * as studentController from './controllers'
 import { config } from './config'
-import { uploadNewStudent, uploadCurrentStudent } from './controllers/upload'
+import studentRoutes from './routes'
 
 const app = express()
 
@@ -38,9 +36,6 @@ data2.forEach(student => {
 })
 
 
-// 'use strict';
-// var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-// cloudinary.config(_extends({}, config));
 const { cloud_name, api_key, api_secret } = config
 cloudinary.config({cloud_name, api_key, api_secret})
 
@@ -67,24 +62,9 @@ cloudinary.config({cloud_name, api_key, api_secret})
 //     })
 // })
 
-app.get('/', (req, res) => {
-    return res.send('Api working')
-})
 
-const storage = multer.memoryStorage()
-const upload = multer({ storage })
 
-app.post('/files', upload.single('src'), uploadNewStudent)
-
-app.post('/file', upload.single('src'), uploadCurrentStudent)
-
-app.get('/students', studentController.getStudents)
-    .post('/students', studentController.addStudent)
-    .put('/students', studentController.updateStudent)
-
-app.get('/students/:id', studentController.getStudent)
-    .delete('/students/:id', studentController.deleteStudent)
-
+app.use('/', studentRoutes)
 
 const port = process.env.port || 3001
 app.listen(port, () => {
