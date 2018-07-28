@@ -80,7 +80,7 @@ export const getStudent = (req, res) => {
 }
 
 export const deleteStudent = (req, res) => {
-    Student.findByIdAndRemove(req.params.id, (err, todo) => {
+    Student.findByIdAndRemove(req.params.id, (err, student) => {
         if(err){
             return res.json({
                 'success': false,
