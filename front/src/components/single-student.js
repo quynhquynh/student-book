@@ -38,11 +38,11 @@ const SingleStudent = ({skills, firstName, lastName, title, nationality, src, wh
             </div>
             <div>
                 <span>Joined on: </span>
-                <span>{joinedOn}</span>
+                <span>{joinedOn !== undefined && joinedOn.substr(0, 10)}</span>
             </div>
         </div>
     </div>
-    
 )
-
+    
+ 
 export default SingleStudent

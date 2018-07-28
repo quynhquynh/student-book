@@ -43,7 +43,7 @@ const Edit = ({handleSubmit, handleEdit, handleChange, _id, skills, firstName, l
             </div>
             <div>
                 <span>Joined on: </span>
-                <input type='text' name='joinedOn' value={joinedOn} onChange={e => handleChange(e)} />
+                <input type='date' name='joinedOn' value={joinedOn} onChange={e => handleChange(e)} />
             </div>
             <div>
                 <span>Choose another image</span>

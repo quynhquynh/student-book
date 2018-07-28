@@ -21,8 +21,7 @@ class Student extends React.Component{
             longTermVision: '',
             motivatesMe: '',
             favoriteQuote: '',
-            joinedOn: '',
-            touched: false
+            joinedOn: ''
         }
     }
 
@@ -40,7 +39,7 @@ class Student extends React.Component{
     componentDidUpdate(){
         const {student} = this.props
         const {firstName} = this.state
-        if(student && !firstName){
+        if(student && student.firstName !== firstName){
             this.setState({
                 ...student
             })
@@ -60,14 +59,13 @@ class Student extends React.Component{
         form.set('id', id)
         updateData(form)
         this.setState(prevState => ({
-            isEditing: !prevState.isEditing,
-            touched: !prevState.touched
+            isEditing: !prevState.isEditing
         }))
     }
 
     render(){
         const { hasError, isLoading, student, updatedInfo } = this.props
-        
+        const keys = Object.keys(updatedInfo).length
     
         if(hasError){
             return <p>Sorry! Loading items errored</p>
@@ -87,7 +85,7 @@ class Student extends React.Component{
                         <button>Delete</button>
                     </div>
                 </div>
-                <Edit handleSubmit={this.handleSubmit} {...this.state} handleEdit={this.handleEdit} handleChange={this.handleChange} />
+                <Edit handleSubmit={this.handleSubmit} {...this.state} joinedOn={this.state.joinedOn.substr(0, 10)} handleEdit={this.handleEdit} handleChange={this.handleChange} />
             </div>
         )
             
@@ -102,7 +100,7 @@ class Student extends React.Component{
                         <button>Delete</button>
                     </div>
                 </div>
-                {this.state.touched ? <SingleStudent {...this.state} src={updatedInfo.src} skills={student && student.skills.join(', ')} /> 
+                {keys ? <SingleStudent {...updatedInfo} skills={updatedInfo && updatedInfo.skills.join(', ')} /> 
                         : <SingleStudent {...student} skills={student && student.skills.join(', ')} />}
             </div>
         )
