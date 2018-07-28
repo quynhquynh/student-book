@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchStudents, updateStudent } from '../../actions'
+import { fetchStudents, updateStudent, deleteStudent } from '../../actions'
 import SingleStudent from '../../components/single-student'
 import Edit from '../../components/edit'
 import './index.css'
@@ -63,9 +63,16 @@ class Student extends React.Component{
         }))
     }
 
+    handleDelete = () => {
+        const {id, deleteData, isLoading, hasError} = this.props
+        deleteData(`/students/${id}`)
+        !isLoading && !hasError && this.props.history.push('/students')
+    }
+
     render(){
         const { hasError, isLoading, student, updatedInfo } = this.props
         const keys = Object.keys(updatedInfo).length
+    
     
         if(hasError){
             return <p>Sorry! Loading items errored</p>
@@ -82,7 +89,7 @@ class Student extends React.Component{
                 <div>
                     <Link to='/students'>Back to Home</Link>
                     <div id='btn'>
-                        <button>Delete</button>
+                        <button onClick={this.handleDelete}>Delete</button>
                     </div>
                 </div>
                 <Edit handleSubmit={this.handleSubmit} {...this.state} joinedOn={this.state.joinedOn.substr(0, 10)} handleEdit={this.handleEdit} handleChange={this.handleChange} />
@@ -97,7 +104,7 @@ class Student extends React.Component{
                     <Link to='/students'>Back to Home</Link>
                     <div id='btn'>
                         <button onClick={this.handleEdit}>Edit</button>
-                        <button>Delete</button>
+                        <button onClick={this.handleDelete}>Delete</button>
                     </div>
                 </div>
                 {keys ? <SingleStudent {...updatedInfo} skills={updatedInfo && updatedInfo.skills.join(', ')} /> 
@@ -122,4 +129,4 @@ const mapStateToProps = (state, props) => {
     }
 }
 
-export default connect(mapStateToProps, { fetchData: url => fetchStudents(url), updateData: data => updateStudent(data) })(Student)
+export default connect(mapStateToProps, { fetchData: url => fetchStudents(url), updateData: data => updateStudent(data), deleteData: url => deleteStudent(url) })(Student)

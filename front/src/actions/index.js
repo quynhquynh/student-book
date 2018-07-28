@@ -64,6 +64,7 @@ export const addStudent = form => {
             return response.json()
         })
         .then(data => dispatch(postStudentSuccess(data)))
+        .catch(() => dispatch(fetchHasError(true)))
     }
 }
 
@@ -83,10 +84,24 @@ export const updateStudent = form => {
             body: form
         })
         .then(response => {
-            console.log('response', response)
             dispatch(isLoading(false))
             return response.json()
         })
         .then(data => dispatch(updateStudentSuccess(data)))
+    }
+}
+
+
+export const deleteStudent = (url) => {
+    return dispatch => {
+        dispatch(isLoading(true))
+        fetch(url, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            dispatch(isLoading(false))
+            return response.json()
+        })
+        .catch(() => dispatch(fetchHasError(true)))
     }
 }
