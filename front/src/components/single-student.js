@@ -1,48 +1,27 @@
 import React from 'react'
+import ChunkShow from './chunk-show'
 
-const SingleStudent = ({skills, firstName, lastName, title, nationality, src, whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn}) => (
-    <div id='student'>
-        <img src={src} alt={firstName} width='300' height='350'/>
-        <div id='side-panel'>
-            <div>
-                <span>Full name: </span>
-                <span>{firstName} {lastName}</span>
-            </div>
-            <div>
-                <span>Title: </span>
-                <span>{title}</span>
-            </div>
-            <div>
-                <span>Nationality: </span>
-                <span>{nationality}</span>
-            </div>
-            <div>
-                <span>Skills: </span>
-                <span>{skills}</span>
-            </div>
-            <div>
-                <span>Why Software Developer: </span>
-                <span>{whySofterDeveloper}</span>
-            </div>
-            <div>
-                <span>Long-term vision: </span>
-                <span>{longTermVision}</span>
-            </div>
-            <div>
-                <span>Motivate Me: </span>
-                <span>{motivatesMe}</span>
-            </div>
-            <div>
-                <span>Favorite quote: </span>
-                <span>{favoriteQuote}</span>
-            </div>
-            <div>
-                <span>Joined on: </span>
-                <span>{joinedOn !== undefined && joinedOn.substr(0, 10)}</span>
+const SingleStudent = ({skills, firstName, lastName, title, nationality, src, whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn}) => {
+    const arr = [
+        {part: 'Full name: ', value: `${firstName} ${lastName}`},
+        {part: 'Title: ', value: title},
+        {part: 'Nationality: ', value: nationality},
+        {part: 'Skills: ', value: skills},
+        {part: 'Why Software Developer: ', value: whySofterDeveloper},
+        {part: 'Long-term vision: ', value: longTermVision},
+        {part: 'Motivate Me: ', value: motivatesMe},
+        {part: 'Favorite quote: ', value: favoriteQuote},
+        {part: 'Joined on: ', value: joinedOn !== undefined && joinedOn.substr(0, 10)}
+    ]
+    return (
+        <div id='student'>
+            <img src={src} alt={firstName} width='300' height='350'/>
+            <div id='side-panel'>
+                {arr.map(a => <ChunkShow key={a.part} {...a} />)}
             </div>
         </div>
-    </div>
-)
+    )
+}
     
  
 export default SingleStudent

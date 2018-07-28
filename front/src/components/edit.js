@@ -1,61 +1,37 @@
 import React from 'react'
+import Chunk from './chunk'
 
-const Edit = ({handleSubmit, handleEdit, handleChange, _id, skills, firstName, lastName, title, nationality, src, whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn}) => (
-    <form id='student' onSubmit={handleSubmit}>
-        <img src={src} alt={firstName} width='300' height='350'/>
+const Edit = ({handleSubmit, handleEdit, handleChange, _id, skills, firstName, lastName, title, nationality, src, whySofterDeveloper, longTermVision, motivatesMe, favoriteQuote, joinedOn}) => {
+    const arr = [
+        {part: 'firstName', value: firstName},
+        {part: 'lastName', value: lastName},
+        {part: 'title', value: title},
+        {part: 'nationality', value: nationality},
+        {part: 'skills', value: skills},
+        {part: 'whySofterDeveloper', value: whySofterDeveloper},
+        {part: 'longTermVision', value: longTermVision},
+        {part: 'motivatesMe', value: motivatesMe},
+        {part: 'favoriteQuote', value: favoriteQuote},
+        {part: 'joinedOn', value: joinedOn, type: 'date'}
+    ]
+    return (
+        <form id='student' onSubmit={handleSubmit}>
+            <img src={src} alt={firstName} width='300' height='350'/>
+            
+            <div id='side-panel' className='edit-panel'>
+                {arr.map(a => <Chunk key={a.part} {...a} onChange={handleChange} />)}
+                <div>
+                    <span>Choose another image</span>
+                    <input type='file' name='src' />
+                </div>
+            </div>
+            <div id='btn'>
+                <button type='submit'>Save</button>
+                <button onClick={handleEdit}>Cancel</button>
+            </div>
+        </form>
         
-        <div id='side-panel' className='edit-panel'>
-            <div>
-                <span>First name: </span>
-                <input type='text' name='firstName' value={firstName} onChange={handleChange} />
-            </div>
-            <div>
-                <span>Last name: </span>
-                <input type='text' name='lastName' value={lastName} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Title: </span>
-                <input type='text' name='title' value={title} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Nationality: </span>
-                <input type='text' name='nationality' value={nationality} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Skills: </span>
-                <input type='text' name='skills' value={skills} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Why Software Developer: </span>
-                <input type='text' name='whySofterDeveloper' value={whySofterDeveloper} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Long-term vision: </span>
-                <input type='text' name='longTermVision' value={longTermVision} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Motivates Me: </span>
-                <input type='text' name='motivatesMe' value={motivatesMe} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Favorite quote: </span>
-                <input type='text' name='favoriteQuote' value={favoriteQuote} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Joined on: </span>
-                <input type='date' name='joinedOn' value={joinedOn} onChange={e => handleChange(e)} />
-            </div>
-            <div>
-                <span>Choose another image</span>
-                <input type='file' name='src' />
-            </div>
-        </div>
-        <div id='btn'>
-            <button type='submit'>Save</button>
-            <button onClick={handleEdit}>Cancel</button>
-        </div>
-    </form>
+    )
     
-)
-
+}
 export default Edit
