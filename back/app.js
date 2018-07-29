@@ -14,7 +14,7 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const MONGOLAB_URI = process.env.MONGOLAB_URI || 'mongodb://quynhquynh:quynh248@ds159121.mlab.com:59121/heroku_lzmwr7gz'
+const MONGOLAB_URI = process.env.MONGOLAB_URI || 'mongodb://quynhquynh:quynh248@ds159121.mlab.com:59121/students'
 mongoose.connect(MONGOLAB_URI, {useNewUrlParser: true})
 
 initializeDb()
