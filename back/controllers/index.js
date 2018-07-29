@@ -9,7 +9,7 @@ export const getStudents = (req, res) => {
                 students
             })
         })
-        .catch(err => {
+        .catch(() => {
             return res.json({
                 'success': false,
                 'message': 'some error'
@@ -18,7 +18,6 @@ export const getStudents = (req, res) => {
 }
 
 export const addStudent = (req, res) => {
-    console.log(req.body)
     const new_student = new Student(req.body)
     new_student.save((err, student) => {
         if(err){
@@ -36,10 +35,7 @@ export const addStudent = (req, res) => {
 }
 
 export const updateStudent = (req, res) => {
-    console.log('put come here')
-    console.log(req.body.id)
     Student.findByIdAndUpdate(req.body.id, req.body, {new: true}, (err, student) => {
-        console.log(student)
         if(err){
             return res.json({
                 'success': false,

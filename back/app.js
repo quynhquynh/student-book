@@ -14,13 +14,14 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-mongoose.connect('mongodb://localhost:27017/students', {useNewUrlParser: true})
+mongoose.connect('mongodb://quynhquynh:quynh248@ds159121.mlab.com:59121/students', {useNewUrlParser: true})
 
-initializeDb()
+// initializeDb()
 
 app.use('/', studentRoutes)
 
 const port = process.env.port || 3001
 app.listen(port, () => {
+    // eslint-disable-next-line no-console
     console.log(`app listening on port ${port}`)
 })
