@@ -2,6 +2,10 @@
   "name": "student-book",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "9.8.0",
+    "npm": "6.2.0"
+  },
   "main": "app_hooked.js",
   "scripts": {
     "start": "node app_hooked.js",
