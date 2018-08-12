@@ -1,0 +1,28 @@
+{
+  "name": "student-book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app_hooked.js",
+  "scripts": {
+    "start": "node app_hooked.js",
+    "server": "nodemon --ignore client app_hooked.js",
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-preset-es2015-node": "^6.1.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "cloudinary": "^1.11.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.4",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.1"
+  }
+}
