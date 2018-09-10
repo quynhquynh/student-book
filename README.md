@@ -4,4 +4,4 @@ Built a gallery book for Integrify students using MERN-stack
 
 ## Deployment
 
-[Visit page](https://student-book.herokuapp.com/students)
+[Visit page](https://student-book.herokuapp.com/)
