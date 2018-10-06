@@ -20,7 +20,6 @@ export const uploadNewStudent = (req, res) => {
   } = req.body;
   const regex = /[,(\s)?]/;
   skills = skills.split(regex).filter(skill => skill.length);
-  console.log(req.file);
   if (req.file) {
     cloudinary.uploader
       .upload_stream(
@@ -160,10 +159,11 @@ export const uploadCurrentStudent = (req, res) => {
         favoriteQuote,
         joinedOn
       })
-      .then(() => {
+      .then(data => {
+        console.log('data', data.src);
         res.status(200).json({
           success: true,
-          src: '',
+          src: data.src,
           id,
           firstName,
           lastName,

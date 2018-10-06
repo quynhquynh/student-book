@@ -1,27 +1,28 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchStudents, updateStudent, deleteStudent } from "../../actions";
-import SingleStudent from "../../components/single-student";
-import Edit from "../../components/edit";
-import "./index.css";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchStudents, updateStudent, deleteStudent } from '../../actions';
+import SingleStudent from '../../components/single-student';
+import Edit from '../../components/edit';
+import './index.css';
 
 class Student extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isEditing: false,
-      skills: "",
-      firstName: "",
-      lastName: "",
-      title: "",
-      nationality: "",
-      alt: "",
-      whySofterDeveloper: "",
-      longTermVision: "",
-      motivatesMe: "",
-      favoriteQuote: "",
-      joinedOn: ""
+      skills: '',
+      firstName: '',
+      lastName: '',
+      title: '',
+      nationality: '',
+      alt: '',
+      src: '',
+      whySofterDeveloper: '',
+      longTermVision: '',
+      motivatesMe: '',
+      favoriteQuote: '',
+      joinedOn: ''
     };
   }
 
@@ -56,7 +57,7 @@ class Student extends React.Component {
     e.preventDefault();
     const { id, updateData } = this.props;
     const form = new FormData(e.target);
-    form.set("id", id);
+    form.set('id', id);
     updateData(form);
     this.setState(prevState => ({
       isEditing: !prevState.isEditing
@@ -66,7 +67,7 @@ class Student extends React.Component {
   handleDelete = () => {
     const { id, deleteData, isLoading, hasError } = this.props;
     deleteData(`/students/${id}`);
-    !isLoading && !hasError && this.props.history.push("/students");
+    !isLoading && !hasError && this.props.history.push('/students');
   };
 
   render() {
@@ -113,12 +114,13 @@ class Student extends React.Component {
         {keys ? (
           <SingleStudent
             {...updatedInfo}
-            skills={updatedInfo && updatedInfo.skills.join(", ")}
+            skills={updatedInfo && updatedInfo.skills.join(', ')}
+            src={this.state.src}
           />
         ) : (
           <SingleStudent
             {...student}
-            skills={student && student.skills.join(", ")}
+            skills={student && student.skills.join(', ')}
           />
         )}
       </div>

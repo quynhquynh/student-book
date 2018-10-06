@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 const fileFilter = (req, file, cb) => {
-  const regex = /\.(jpg|jpeg|png|gif)$/;
+  const regex = /\.(jpg|jpeg|png|gif)$/gi;
   if (!file.originalname.match(regex)) {
     return cb(new Error('Only image files allowed'), false);
   }
@@ -26,8 +26,8 @@ router.post('/file', upload.single('src'), uploadCurrentStudent);
 
 router
   .get('/students', studentController.getStudents)
-  .post('/students', studentController.addStudent)
-  .put('/students', studentController.updateStudent);
+  .post('/students', upload.single('src'), studentController.addStudent)
+  .put('/students', upload.single('src'), studentController.updateStudent);
 
 router
   .get('/students/:id', studentController.getStudent)

@@ -1,4 +1,6 @@
 import Student from '../models';
+import cloudinary from 'cloudinary';
+import keys from '../config/keys';
 
 export const getStudents = (req, res) => {
   Student.find()
@@ -17,6 +19,9 @@ export const getStudents = (req, res) => {
       });
     });
 };
+
+const { api_key, api_secret } = keys;
+cloudinary.config({ cloud_name: 'qq', api_key, api_secret });
 
 export const addStudent = (req, res) => {
   const new_student = new Student(req.body);
@@ -43,6 +48,7 @@ export const updateStudent = (req, res) => {
     { new: true },
     (err, student) => {
       if (err) {
+        console.log(err);
         return res.json({
           success: false,
           message: 'some error',
@@ -91,8 +97,7 @@ export const deleteStudent = (req, res) => {
       });
     }
     return res.json({
-      success: true,
-      message: student.fullName + 'deleted'
+      success: true
     });
   });
 };

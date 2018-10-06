@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "Source Sans Pro";
+  font-family: 'Source Sans Pro';
 }
 
 * {
   box-sizing: border-box;
   background: #f2f2f2;
-  font-family: "Source Sans Pro";
+  font-family: 'Source Sans Pro';
 }
 
 #main {
@@ -27,7 +27,7 @@ a {
 
 #student {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-column-gap: 15px;
   grid-row-gap: 25px;
 }
