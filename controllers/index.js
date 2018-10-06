@@ -22,6 +22,7 @@ export const addStudent = (req, res) => {
   const new_student = new Student(req.body);
   new_student.save((err, student) => {
     if (err) {
+      console.log(err);
       return res.json({
         success: false,
         message: 'some error'

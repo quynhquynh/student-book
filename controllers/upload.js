@@ -20,6 +20,7 @@ export const uploadNewStudent = (req, res) => {
   } = req.body;
   const regex = /[,(\s)?]/;
   skills = skills.split(regex).filter(skill => skill.length);
+  console.log(req.file);
   if (req.file) {
     cloudinary.uploader
       .upload_stream(
