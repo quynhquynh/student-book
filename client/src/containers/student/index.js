@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchStudents, updateStudent, deleteStudent } from '../../actions';
 import SingleStudent from '../../components/single-student';
+import Loading from '../../components/loading';
 import Edit from '../../components/edit';
 import './index.css';
 
@@ -78,7 +79,7 @@ class Student extends React.Component {
       return <p>Sorry! Loading items errored</p>;
     }
     if (isLoading) {
-      return <p>Loading...</p>;
+      return <Loading />;
     }
     if (!student) {
       return <p>Students not received</p>;

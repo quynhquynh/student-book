@@ -1,13 +1,14 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchStudents } from "../../actions";
-import "./index.css";
-import List from "../../components/list";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchStudents } from '../../actions';
+import './index.css';
+import List from '../../components/list';
+import Loading from '../../components/loading';
 
 class Students extends React.Component {
   componentDidMount() {
-    const url = "/students";
+    const url = '/students';
     this.props.fetchData(url);
   }
 
@@ -17,7 +18,7 @@ class Students extends React.Component {
       return <p>Sorry! Loading items errored</p>;
     }
     if (isLoading) {
-      return <p>Loading...</p>;
+      return <Loading />;
     }
     if (!students) {
       return <p>Students not received</p>;
