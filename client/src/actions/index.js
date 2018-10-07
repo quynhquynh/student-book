@@ -37,7 +37,7 @@ export const fetchStudents = url => {
         return response.json();
       })
       .then(data => dispatch(fetchStudentsSuccess(data)))
-      .catch(err => console.log('err', err) || dispatch(fetchHasError(true)));
+      .catch(() => dispatch(fetchHasError(true)));
   };
 };
 
