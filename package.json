@@ -18,7 +18,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015-node": "^6.1.1",
     "babel-register": "^6.26.0",
