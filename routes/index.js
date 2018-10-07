@@ -21,11 +21,15 @@ const upload = multer({ storage, fileFilter });
 
 router
   .get('/api/students', studentController.getStudents)
-  .post('/api/students', upload.single('src'), studentController.addStudent)
-  .put('/api/students', upload.single('src'), studentController.updateStudent);
+  .post('/api/students', upload.single('src'), studentController.addStudent);
 
 router
   .get('/api/students/:id', studentController.getStudent)
-  .delete('/api/students/:id', studentController.deleteStudent);
+  .delete('/api/students/:id', studentController.deleteStudent)
+  .put(
+    '/api/students/:id',
+    upload.single('src'),
+    studentController.updateStudent
+  );
 
 export default router;

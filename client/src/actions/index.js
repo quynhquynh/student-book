@@ -74,8 +74,8 @@ export const updateStudentSuccess = data => {
   };
 };
 
-export const updateStudent = form => {
-  const url = '/api/students';
+export const updateStudent = (form, id) => {
+  const url = `/api/students/${id}`;
   return dispatch => {
     dispatch(isLoading(true));
     fetch(url, {

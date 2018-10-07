@@ -58,8 +58,7 @@ class Student extends React.Component {
     e.preventDefault();
     const { id, updateData } = this.props;
     const form = new FormData(e.target);
-    form.set('id', id);
-    updateData(form);
+    updateData(form, id);
     this.setState(prevState => ({
       isEditing: !prevState.isEditing
     }));
@@ -146,7 +145,7 @@ export default connect(
   mapStateToProps,
   {
     fetchData: url => fetchStudents(url),
-    updateData: data => updateStudent(data),
+    updateData: (data, id) => updateStudent(data, id),
     deleteData: url => deleteStudent(url)
   }
 )(Student);

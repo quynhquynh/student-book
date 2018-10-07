@@ -63,7 +63,8 @@ export const addStudent = (req, res) => {
 };
 
 export const updateStudent = (req, res) => {
-  let { id, firstName, skills } = req.body;
+  const { id } = req.params;
+  let { firstName, skills } = req.body;
   const regex = /[,(\s)?]/;
   skills = skills.split(regex).filter(skill => skill.length);
   const updateFunc = url => {
