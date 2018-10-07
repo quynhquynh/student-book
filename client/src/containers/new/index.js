@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.css';
 import { addStudent } from '../../actions';
 import { connect } from 'react-redux';
@@ -143,6 +144,13 @@ class New extends React.Component {
       : renderForm();
   }
 }
+
+New.propTypes = {
+  addStudent: PropTypes.shape({}).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  hasError: PropTypes.bool.isRequired,
+  postData: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
   const { addStudent, hasError, isLoading } = state;

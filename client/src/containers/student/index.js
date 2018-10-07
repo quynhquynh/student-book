@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { fetchStudents, updateStudent, deleteStudent } from '../../actions';
 import SingleStudent from '../../components/single-student';
 import Loading from '../../components/loading';
@@ -34,8 +35,8 @@ class Student extends React.Component {
   };
 
   componentDidMount() {
-    const { id, fetchData } = this.props;
-    fetchData(`/api/students/${id}`);
+    const { id, fetchStudents } = this.props;
+    fetchStudents(`/api/students/${id}`);
   }
 
   componentDidUpdate() {
@@ -56,17 +57,17 @@ class Student extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { id, updateData } = this.props;
+    const { id, updateStudent } = this.props;
     const form = new FormData(e.target);
-    updateData(form, id);
+    updateStudent(form, id);
     this.setState(prevState => ({
       isEditing: !prevState.isEditing
     }));
   };
 
   handleDelete = () => {
-    const { id, deleteData, isLoading, hasError } = this.props;
-    deleteData(`/api/students/${id}`);
+    const { id, deleteStudent, isLoading, hasError } = this.props;
+    deleteStudent(`/api/students/${id}`);
     !isLoading && !hasError && this.props.history.push('/students');
   };
 
@@ -129,6 +130,17 @@ class Student extends React.Component {
   }
 }
 
+Student.propTypes = {
+  student: PropTypes.shape({}),
+  id: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  hasError: PropTypes.bool.isRequired,
+  updatedInfo: PropTypes.shape({}).isRequired,
+  fetchStudents: PropTypes.func.isRequired,
+  updateStudent: PropTypes.func.isRequired,
+  deleteStudent: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state, props) => {
   const { isLoading, hasError, student, updateStudent } = state;
   const { id } = props.match.params;
@@ -144,8 +156,8 @@ const mapStateToProps = (state, props) => {
 export default connect(
   mapStateToProps,
   {
-    fetchData: url => fetchStudents(url),
-    updateData: (data, id) => updateStudent(data, id),
-    deleteData: url => deleteStudent(url)
+    fetchStudents,
+    updateStudent,
+    deleteStudent
   }
 )(Student);

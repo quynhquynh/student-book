@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { fetchStudents } from '../../actions';
 import './index.css';
 import List from '../../components/list';
@@ -9,7 +10,7 @@ import Loading from '../../components/loading';
 class Students extends React.Component {
   componentDidMount() {
     const url = '/api/students';
-    this.props.fetchData(url);
+    this.props.fetchStudents(url);
   }
 
   render() {
@@ -42,6 +43,13 @@ class Students extends React.Component {
   }
 }
 
+Students.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  hasError: PropTypes.bool.isRequired,
+  students: PropTypes.array.isRequired,
+  fetchStudents: PropTypes.func.isRequired
+};
+
 const mapStateToProps = ({ isLoading, hasError, students }) => {
   return {
     isLoading,
@@ -52,5 +60,5 @@ const mapStateToProps = ({ isLoading, hasError, students }) => {
 
 export default connect(
   mapStateToProps,
-  { fetchData: url => fetchStudents(url) }
+  { fetchStudents }
 )(Students);
