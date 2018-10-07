@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const List = ({ src, _id, firstName, lastName }) => (
   <Link to={`/students/${_id}`}>
-    <li className={src ? "" : "no-img"}>
+    <li className={src ? '' : 'no-img'}>
       {src ? (
         <img src={src} alt="" width="200" height="230" />
       ) : (

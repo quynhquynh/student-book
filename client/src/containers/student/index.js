@@ -35,7 +35,7 @@ class Student extends React.Component {
 
   componentDidMount() {
     const { id, fetchData } = this.props;
-    fetchData(`/students/${id}`);
+    fetchData(`/api/students/${id}`);
   }
 
   componentDidUpdate() {
@@ -67,14 +67,13 @@ class Student extends React.Component {
 
   handleDelete = () => {
     const { id, deleteData, isLoading, hasError } = this.props;
-    deleteData(`/students/${id}`);
+    deleteData(`/api/students/${id}`);
     !isLoading && !hasError && this.props.history.push('/students');
   };
 
   render() {
     const { hasError, isLoading, student, updatedInfo } = this.props;
     const keys = Object.keys(updatedInfo).length;
-
     if (hasError) {
       return <p>Sorry! Loading items errored</p>;
     }
@@ -116,7 +115,7 @@ class Student extends React.Component {
           <SingleStudent
             {...updatedInfo}
             skills={updatedInfo && updatedInfo.skills.join(', ')}
-            src={this.state.src}
+            src={updatedInfo.src}
           />
         ) : (
           <SingleStudent

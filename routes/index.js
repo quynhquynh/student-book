@@ -20,17 +20,13 @@ const fileFilter = (req, file, cb) => {
 const storage = multer.memoryStorage();
 const upload = multer({ storage, fileFilter });
 
-router.post('/files', upload.single('src'), uploadNewStudent);
-
-router.post('/file', upload.single('src'), uploadCurrentStudent);
+router
+  .get('/api/students', studentController.getStudents)
+  .post('/api/students', upload.single('src'), studentController.addStudent)
+  .put('/api/students', upload.single('src'), studentController.updateStudent);
 
 router
-  .get('/students', studentController.getStudents)
-  .post('/students', upload.single('src'), studentController.addStudent)
-  .put('/students', upload.single('src'), studentController.updateStudent);
-
-router
-  .get('/students/:id', studentController.getStudent)
-  .delete('/students/:id', studentController.deleteStudent);
+  .get('/api/students/:id', studentController.getStudent)
+  .delete('/api/students/:id', studentController.deleteStudent);
 
 export default router;

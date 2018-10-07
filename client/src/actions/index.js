@@ -49,7 +49,7 @@ export const postStudentSuccess = data => {
 };
 
 export const addStudent = form => {
-  const url = '/files';
+  const url = '/api/students';
   return dispatch => {
     dispatch(isLoading(true));
     fetch(url, {
@@ -62,7 +62,7 @@ export const addStudent = form => {
         dispatch(isLoading(false));
         return response.json();
       })
-      .then(data => dispatch(postStudentSuccess(data)))
+      .then(data => dispatch(postStudentSuccess(data.student)))
       .catch(() => dispatch(fetchHasError(true)));
   };
 };
@@ -75,18 +75,18 @@ export const updateStudentSuccess = data => {
 };
 
 export const updateStudent = form => {
-  const url = '/file';
+  const url = '/api/students';
   return dispatch => {
     dispatch(isLoading(true));
     fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       body: form
     })
       .then(response => {
         dispatch(isLoading(false));
         return response.json();
       })
-      .then(data => dispatch(updateStudentSuccess(data)));
+      .then(data => dispatch(updateStudentSuccess(data.student)));
   };
 };
 

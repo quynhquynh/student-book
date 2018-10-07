@@ -8,7 +8,7 @@ import Loading from '../../components/loading';
 
 class Students extends React.Component {
   componentDidMount() {
-    const url = '/students';
+    const url = '/api/students';
     this.props.fetchData(url);
   }
 

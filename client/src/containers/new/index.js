@@ -1,11 +1,11 @@
-import React from "react";
-import "./index.css";
-import { addStudent } from "../../actions";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import SingleStudent from "../../components/single-student";
-import { Field, reduxForm, getFormValues } from "redux-form";
-import moment from "moment";
+import React from 'react';
+import './index.css';
+import { addStudent } from '../../actions';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import SingleStudent from '../../components/single-student';
+import { Field, reduxForm, getFormValues } from 'redux-form';
+import moment from 'moment';
 
 class New extends React.Component {
   constructor(props) {
@@ -17,8 +17,8 @@ class New extends React.Component {
 
   onSubmit = values => {
     const form = new FormData(this.form);
-    if (!form.get("joinedOn")) {
-      form.set("joinedOn", moment(new Date()).format("YYYY-MM-DD"));
+    if (!form.get('joinedOn')) {
+      form.set('joinedOn', moment(new Date()).format('YYYY-MM-DD'));
     }
     this.props.postData(form);
     this.setState({ afterSubmit: true });
@@ -35,7 +35,7 @@ class New extends React.Component {
       <div>
         <label>{label}</label>
         <input type={type} {...input} />
-        <p className="err">{touched ? error : ""}</p>
+        <p className="err">{touched ? error : ''}</p>
       </div>
     );
   };
@@ -150,24 +150,24 @@ const mapStateToProps = state => {
     addStudent,
     hasError,
     isLoading,
-    values: getFormValues("NewStudent")(state)
+    values: getFormValues('NewStudent')(state)
   };
 };
 
 const validate = values => {
-  const { firstName, lastName, nationality, skills, joinedOn } = values;
+  const { firstName, lastName, nationality, skills } = values;
   const errors = {
-    firstName: !firstName ? "Enter first name" : "",
-    lastName: !lastName ? "Enter last name" : "",
-    nationality: !nationality ? "Enter nationality" : "",
-    skills: !skills ? "Enter skills" : ""
+    firstName: !firstName ? 'Enter first name' : '',
+    lastName: !lastName ? 'Enter last name' : '',
+    nationality: !nationality ? 'Enter nationality' : '',
+    skills: !skills ? 'Enter skills' : ''
   };
   return errors;
 };
 
 export default reduxForm({
   validate,
-  form: "NewStudent"
+  form: 'NewStudent'
 })(
   connect(
     mapStateToProps,
