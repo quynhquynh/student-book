@@ -1,7 +1,6 @@
 import express from 'express';
 import multer from 'multer';
 import * as studentController from '../controllers';
-import { uploadNewStudent, uploadCurrentStudent } from '../controllers/upload';
 
 const router = express.Router();
 
